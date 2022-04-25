@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+from re import A
+>>>>>>> Stashed changes
 import discord
 from discord.ext import commands
 import random
@@ -11,9 +15,20 @@ import youtube_dl
 from youtube_dl import YoutubeDL
 from dotenv import load_dotenv
 import os
+<<<<<<< Updated upstream
 
 load_dotenv()
 
+=======
+from pathlib import Path
+
+load_dotenv()
+
+cwd = Path(__file__).parents[0]
+cwd = str(cwd)
+print(f"{cwd}\n-----")
+
+>>>>>>> Stashed changes
 # Suppress noise about console usage from errors
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -237,7 +252,11 @@ class Music(commands.Cog):
                 channel = ctx.author.voice.channel
             except AttributeError:
                 embed = discord.Embed(
+<<<<<<< Updated upstream
                     title="", description="No channel to join. Please call `,join` from a voice channel.", color=discord.Color.green())
+=======
+                    title="", description="No channel to join. Please call `.join` from a voice channel.", color=discord.Color.green())
+>>>>>>> Stashed changes
                 await ctx.send(embed=embed)
                 raise InvalidVoiceChannel(
                     'No channel to join. Please either specify a valid channel or join one.')
@@ -259,8 +278,13 @@ class Music(commands.Cog):
                 raise VoiceConnectionError(
                     f'Connecting to channel: <{channel}> timed out.')
         if (random.randint(0, 1) == 0):
+<<<<<<< Updated upstream
             await ctx.message.add_reaction('👍')
         await ctx.send(f'**Joined `{channel}`**')
+=======
+            await ctx.message.add_reaction('\N{BANANA}')
+        await ctx.send(f'**Swung into `{channel}`**')
+>>>>>>> Stashed changes
 
     @commands.command(name='play', aliases=['sing', 'p'], description="streams music")
     async def play_(self, ctx, *, search: str):
@@ -447,7 +471,11 @@ class Music(commands.Cog):
                          name=f"Now Playing 🎶")
         await ctx.send(embed=embed)
 
+<<<<<<< Updated upstream
     @commands.command(name='volume', aliases=['vol', 'v'], description="changes Kermit's volume")
+=======
+    @commands.command(name='volume', aliases=['vol', 'v'], description="changes Monke volume")
+>>>>>>> Stashed changes
     async def change_volume(self, ctx, *, vol: float = None):
         """Change the player volume.
         Parameters
@@ -496,8 +524,13 @@ class Music(commands.Cog):
             return await ctx.send(embed=embed)
 
         if (random.randint(0, 1) == 0):
+<<<<<<< Updated upstream
             await ctx.message.add_reaction('👋')
         await ctx.send('**Successfully disconnected**')
+=======
+            await ctx.message.add_reaction('\N{BANANA}')
+        await ctx.send('**OOOGA OOOGA BOOOGA**')
+>>>>>>> Stashed changes
 
         await self.cleanup(ctx.guild)
 
@@ -511,5 +544,14 @@ async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
     print('------')
 
+<<<<<<< Updated upstream
 bot.add_cog(Music(bot))
+=======
+for file in os.listdir(cwd + "/cogs"):
+    if file.endswith(".py") and not file.startswith("_"):
+        bot.load_extension(f"cogs.{file[:-3]}")
+
+bot.add_cog(Music(bot))
+
+>>>>>>> Stashed changes
 bot.run(os.getenv('TOKEN'))
